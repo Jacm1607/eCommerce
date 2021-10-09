@@ -7,7 +7,7 @@
             @foreach ($category->subcategories as $subcategory)
                 @if ($subcategory->subcategory_status == 1)
                     <li class="border-b-2 border-gray-200">
-                        <a href="#" class="text-gray-600 font-semibold text-xs uppercase tracking-widest inline-block py-1 px-4 hover:text-lightBlue-800 leading-4 pt-1.5">{{ $subcategory->name }}</a>
+                        <a href="{{ route('subcategories.show', $subcategory) }}" class="text-gray-600 font-semibold text-xs uppercase tracking-widest inline-block py-1 px-4 hover:text-lightBlue-800 leading-4 pt-1.5">{{ $subcategory->name }}</a>
                     </li>
                 @endif
             @endforeach
