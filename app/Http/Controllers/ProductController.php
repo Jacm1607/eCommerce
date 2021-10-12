@@ -8,6 +8,10 @@ class ProductController extends Controller
 {
     public function show(Product $product)
     {
-        return view('product.show', compact('product'));
+        if ($product->status === '0') {
+            abort(404);
+        } else {
+            return view('product.show', compact('product'));
+        }
     }
 }

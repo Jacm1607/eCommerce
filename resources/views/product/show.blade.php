@@ -1,15 +1,20 @@
+@section('css')
+    {{-- FlexSlider --}}
+    <link rel="stylesheet" href="{{ asset('vendor/FlexSlider/flexslider.css') }}">
+@endsection
+@section('script')
+    {{-- JQuery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- FlexSlider --}}
+    <script src="{{ asset('vendor/FlexSlider/jquery.flexslider-min.js') }}"></script>
+@endsection
 <x-app-layout>
-    <div class="container py-8"  x-data="{ showModal3: false }" :class="{'overflow-y-hidden': showModal3}">
-
+    <div class="container py-8"  x-data="modal()" :class="{'overflow-y-hidden': open}">
         {{-- MODAL --}}
         <div>
-
-
-
-            <!-- Modal3 -->
             <div
-              class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
-              x-show="showModal3"
+              class="fixed inset-0 w-full px-8 h-full z-50 bg-black bg-opacity-50 duration-300 overflow-y-auto hidden"
+              :class="{'block':open, 'hidden':!open}"
               x-transition:enter="transition duration-300"
               x-transition:enter-start="opacity-0"
               x-transition:enter-end="opacity-100"
@@ -17,11 +22,11 @@
               x-transition:leave-start="opacity-100"
               x-transition:leave-end="opacity-0"
             >
-              <div class="relative sm:w-3/4 md:w-1/2 lg:w-1/3 mx-2 sm:mx-auto mt-10 mb-24 opacity-100">
+              <div class="relative w-full mt-10 mb-24 opacity-100">
                 <div
                   class="relative bg-white shadow-lg rounded-lg text-gray-900 z-20"
-                  @click.away="showModal3 = false"
-                  x-show="showModal3"
+                  @click.away="close()"
+                  x-show="open"
                   x-transition:enter="transition transform duration-300"
                   x-transition:enter-start="scale-0"
                   x-transition:enter-end="scale-100"
@@ -30,76 +35,17 @@
                   x-transition:leave-end="scale-0"
                 >
                   <header class="flex flex-col justify-center items-center p-3 text-blue-600">
-                    <div class="flex justify-center w-28 h-28 border-4 border-blue-600 rounded-full mb-4">
-                      <svg class="fill-current w-20" viewBox="0 0 20 20">
-                        <path
-                          d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
-                        ></path>
-                      </svg>
-                    </div>
-                    <h2 class="font-semibold text-2xl">Success</h2>
+                    <h2 class="font-semibold text-2xl">Descripción</h2>
                   </header>
                   <main class="p-3 text-center">
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam voluptatem, optio dolorem accusantium fuga
-                      molestias nobis sequi autem ducimus laudantium beatae amet earum, quia reiciendis corporis animi modi
-                      pariatur impedit!
-                    </p>
-                    <p>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, quaerat! Perferendis, saepe? Neque
-                      consequuntur deserunt odio perferendis debitis, praesentium accusantium delectus totam qui eligendi
-                      voluptatibus molestiae nemo numquam, itaque sit? Sunt odit odio magni ipsam consectetur distinctio nostrum
-                      nihil optio reprehenderit quisquam! Commodi repellendus nobis necessitatibus quaerat aspernatur quidem,
-                      iure similique veniam, facere omnis ipsam quos porro. Recusandae, repudiandae quod? Hic aliquid quam
-                      incidunt. Repudiandae velit praesentium fuga sapiente atque quas assumenda iure necessitatibus quidem
-                      sequi, dolorum non labore expedita quisquam id. Blanditiis perferendis tenetur voluptatibus iusto
-                      obcaecati cupiditate mollitia. Ex accusantium assumenda quod, officiis voluptates nemo saepe error quo ut
-                      nulla id aspernatur voluptatem sit eligendi itaque ad nam officia iusto dolorum voluptatum, alias
-                      laboriosam perspiciatis hic ab? Excepturi. Inventore voluptate magni asperiores ab natus dignissimos
-                      reiciendis commodi temporibus porro molestiae! Minus, voluptates assumenda, nihil doloribus labore
-                      mollitia voluptas corporis sit placeat ullam harum temporibus voluptatibus explicabo praesentium et. Quae
-                      nemo quaerat sequi perspiciatis fugit nisi facere voluptatibus! Officiis ad sint iusto, corrupti
-                      recusandae enim at itaque eaque omnis. Inventore consequuntur obcaecati, nulla beatae voluptas ducimus.
-                      Iste, eos accusantium. Ipsam corporis deleniti animi omnis. Totam necessitatibus minus eum, quasi sint
-                      ipsa dignissimos, repellat non temporibus quam pariatur. Est neque in repellendus quia officia quibusdam
-                      voluptas rerum impedit similique ipsa? Voluptatem inventore dicta excepturi officiis deleniti repudiandae
-                      iste sapiente nam impedit quisquam quia molestias recusandae ullam necessitatibus illum qui officia
-                      voluptatibus at cupiditate animi obcaecati, incidunt vero. Ut, commodi illum? Assumenda explicabo dolores
-                      id voluptates voluptatem, minima molestias quam reprehenderit aperiam totam minus. Rem ipsum modi quas
-                      architecto! Reiciendis omnis laboriosam exercitationem facilis, assumenda culpa fuga quas ipsam maxime
-                      tempore. Eum, recusandae optio neque illo, expedita nulla quod sit fugiat nam voluptate quaerat nemo sint
-                      reprehenderit doloremque minus provident. Ullam consequuntur unde perspiciatis cum praesentium ipsa
-                      quibusdam architecto voluptas id. Eveniet sint laborum debitis obcaecati autem rem similique praesentium
-                      cumque! Atque necessitatibus impedit harum ad suscipit iusto adipisci, dolorum doloremque, corrupti quia
-                      eaque nobis quae debitis numquam magni explicabo maiores? Nulla non sunt sed quibusdam nemo quod quia odit
-                      sapiente. Totam quaerat amet tenetur laboriosam quis enim sed sit error, quae maiores natus sint numquam
-                      voluptatum? Quasi odio quod pariatur. Quod architecto tempore voluptate dignissimos necessitatibus velit
-                      assumenda excepturi porro? Atque, numquam praesentium beatae illo dolor id earum ratione repellat
-                      voluptatibus ea, reiciendis ipsam magni nisi, accusamus reprehenderit vitae. Quidem? Asperiores cupiditate
-                      distinctio voluptates rem et quo placeat eveniet quaerat beatae, excepturi aspernatur autem perspiciatis,
-                      ab itaque suscipit hic sed exercitationem est iusto ipsam? Quasi quia cupiditate voluptatem.
-                      Necessitatibus, doloremque? Non maiores explicabo quasi aperiam voluptates earum sed minima quia odio
-                      iusto accusantium dicta similique numquam voluptatum facilis, itaque, sint officiis aut corporis repellat,
-                      illum nemo. Eos qui magni deleniti! Inventore itaque praesentium facilis tenetur dolore beatae rem sunt
-                      vel voluptates, ratione sit, quas repellendus dicta sed repellat dolorum consectetur debitis ipsa
-                      excepturi fuga veniam. Repellat odio veritatis reprehenderit voluptatum. Aspernatur, ratione maxime facere
-                      autem aperiam accusamus commodi quibusdam molestiae natus animi! Suscipit, recusandae soluta?
-                      Reprehenderit aspernatur quia, fugiat laborum, doloribus provident numquam sed laudantium ut officiis
-                      dolorem architecto. Animi. Incidunt obcaecati adipisci aspernatur accusamus, debitis, enim delectus, cum
-                      facere dicta quasi perferendis consequuntur? Quidem voluptatum placeat quia suscipit minus fugit velit
-                      reprehenderit ipsam, voluptatem laboriosam eum autem sequi nemo? Magnam placeat iure est soluta nisi
-                      consequuntur possimus in maiores autem. Itaque iure neque possimus quibusdam odit, recusandae odio totam
-                      maiores quidem consectetur, id cum perferendis et ducimus, earum sapiente. Hic ad accusamus molestiae
-                      nulla ducimus, tempore impedit sint ut tenetur! Recusandae dolorum adipisci est voluptatem illo minima
-                      sint saepe corrupti facilis amet ipsam, reprehenderit molestias doloribus, nostrum eos qui.
-                    </p>
+                    <p>{!! $product->description !!}</p>
                   </main>
                   <footer class="flex justify-center bg-transparent">
                     <button
                       class="bg-blue-600 font-semibold text-white py-3 w-full rounded-b-md hover:bg-blue-700 focus:outline-none focus:ring shadow-lg hover:shadow-none transition-all duration-300"
-                      @click="showModal3 = false"
+                      @click="close()"
                     >
-                      Confirm
+                      Cerrar
                     </button>
                   </footer>
                 </div>
@@ -108,7 +54,7 @@
         </div>
         {{-- FIN MODAL --}}
         <div class="grid grid-cols-2 gap-6">
-            <div class="">
+            <div class="md:col-span-1 col-span-2">
                 <!-- Place somewhere in the <body> of your page -->
                 <div class="flexslider">
                     <ul class="slides">
@@ -124,12 +70,21 @@
                     </ul>
                 </div>
             </div>
-            <div class="">
-                <h1 class="text-lg font-bold text-gray-800">{{ $product->name }}</h1>
+            <div class="md:col-span-1 col-span-2">
+                <h1 class="text-lg font-bold text-gray-800">
+                    {{ $product->name }}
+                    @if ($product->offer_price > 0 && !is_null($product->offer_price))
+                        <span class="text-white text-xs font-bold bg-red-500 py-0.5 px-1.5 rounded-xl">-{{ round(100-($product->offer_price/$product->price)*100) }}%</span>
+                    @endif
+                </h1>
                 <div class="flex">
                     <p class="font-semibold">Marca: <span class="capitalize">{{ $product->brand->name }}</span></p>
                 </div>
-                <p class="text-2xl font-semibold text-gray-800 my-4">Bs. {{ number_format((float)$product->price, 2, '.', '') }}</p>
+                @if ($product->offer_price > 0 && !is_null($product->offer_price))
+                    <p class="my-4"><span class="bg-white px-2.5 py-1.5 rounded-lg shadow-sm line-through text-xs font-semibold text-gray-500 ">Bs. {{ number_format((float)$product->price, 2, '.', '') }}</span> <span class="bg-teal-500 text-sm text-white px-2.5 py-1.5 rounded-xl shadow-sm font-bold">Bs. {{ number_format((float)$product->offer_price, 2, '.', '') }}</span></p>
+                @else
+                    <p class="text-2xl font-semibold text-gray-800 my-4">Bs. {{ number_format((float)$product->price, 2, '.', '') }}</p>
+                @endif
                 <div class="bg-lime-500 rounded-lg shadow mb-6">
                     <div class="p-4 flex items-center">
                         <span class="flex items-center justify-center w-10 h-10 rounded-full bg-white"><i class="fas fa-truck text-lime-500"></i></span>
@@ -139,9 +94,28 @@
                         </div>
                     </div>
                 </div>
-                {{-- @livewire('add-cart-item', ['product' => $product]) --}}
+                @if ($product->status === '1')
+                    @livewire('add-cart-item', ['product' => $product])
+                @else
+                    <div class="flex bg-red-100 rounded-lg p-4 mb-4 text-sm text-red-700" role="alert">
+                        <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                        <div>
+                            <span class="font-bold">Producto no disponible.</span> Este producto no se encuentra disponible por el momento. Puedes intentar solicitarlo haciendo <a href="#" class="font-bold">Click aquí</a>
+                        </div>
+                    </div>
+                @endif
                 <hr class="my-3">
-                <p>{!! Str::limit($product->description, 700, '<button @click="showModal3 = true">... <span class="text-lime-500 uppercase text-xs tracking-widest font-bold">Ver mas</span></button>') !!}</p>
+                @if (!is_null($product->description))
+                    <p>{!! Str::limit($product->description, 700, '<button @click="show()">... <span class="text-lime-500 uppercase text-xs tracking-widest font-bold">Ver mas</span></button>') !!}</p>
+                @else
+                    <p>Sin descripción por el momento.</p>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 group-hover:opacity-50 opacity-70" fill="none"
+                                                viewBox="0 0 24 24" stroke="black">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                            </svg>
+                @endif
             </div>
         </div>
     </div>
@@ -165,6 +139,10 @@
                             this.open = true;
                             document.getElementsByTagName('html')[0].style.overflow = 'hidden'
                         }
+                    },
+                    close() {
+                        this.open = false
+                        document.getElementsByTagName('html')[0].style.overflow = 'auto'
                     }
                 }
             }

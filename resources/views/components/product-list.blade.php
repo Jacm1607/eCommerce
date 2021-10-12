@@ -6,21 +6,40 @@
             <div class="flex flex-col">
                 <div class="bg-white border border-white shadow-lg  rounded-3xl p-4 m-4">
                     <div class="flex-none sm:flex">
-                        <div class=" relative h-32 w-32   sm:mb-0 mb-3">
-                            <img src="https://mediaserver.goepson.com/ImConvServlet/imconv/e7af2459bfc25d1ea99d8618abfd2aa09552495a/1200Wx1200H?use=banner&assetDescr=L1110_690x460_3" class=" w-32 h-32 object-cover rounded-2xl">
+                        <div class=" relative h-32 w-32 sm:mb-0 mb-3">
+                            @if(count($product->images) > 0)
+                                <img src="{{ Storage::url($product->images->first()->url) }}" class="w-32 h-32 object-cover rounded-2xl">
+                            @else
+                                <img src="{{ asset('img/no_imagen.png') }}" class="w-32 h-32 object-cover rounded-2xl">
+                            @endif
                         </div>
                         <div class="flex-auto sm:ml-5 justify-evenly">
                             <div class="flex items-center justify-between sm:mt-2">
                                 <div class="flex items-center">
                                     <div class="flex flex-col">
-                                        <div class="w-full flex-none text-base text-gray-800 font-bold leading-none">{{ $product->name }}</div>
+                                        <div class="w-full flex-none text-base text-gray-800 font-bold leading-none">
+                                            {{ $product->name }}
+                                            @if ($product->offer_price > 0 && !is_null($product->offer_price))
+                                                <span class="text-white text-xs font-bold bg-red-500 py-0.5 px-1.5 rounded-xl">-{{ round(100-($product->offer_price/$product->price)*100) }}%</span>
+                                            @endif
+                                        </div>
                                         <div class="flex-auto text-gray-500 my-1">
                                             <span class="mr-3 text-xs text-white uppercase tracking-widest bg-teal-500 px-1.5 py-0.5 rounded-md">
                                                 {{ $product->brand->name }}
                                             </span>
-                                            <span class="mr-3 text-sm">Bs.
-                                                {{ number_format((float) $product->price, 2, '.', '') }}
-                                            </span>
+                                            @if ($product->offer_price > 0 && !is_null($product->offer_price))
+                                                <span class="mr-3 text-xs line-through">Bs.
+                                                    {{ number_format((float) $product->price, 2, '.', '') }}
+                                                </span>
+                                                <span class="mr-3 text-sm font-bold text-blueGray-900">Bs.
+                                                    {{ number_format((float) $product->offer_price, 2, '.', '') }}
+                                                </span>
+                                            @else
+                                                <span class="mr-3 text-sm">Bs.
+                                                    {{ number_format((float) $product->price, 2, '.', '') }}
+                                                </span>
+                                            @endif
+
                                         </div>
                                     </div>
                                 </div>
