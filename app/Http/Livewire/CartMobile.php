@@ -6,6 +6,7 @@ use Livewire\Component;
 
 class CartMobile extends Component
 {
+    protected $listeners = ['render'];
     public function render()
     {
         return view('livewire.cart-mobile');

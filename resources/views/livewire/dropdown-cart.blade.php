@@ -15,7 +15,11 @@
             <ul>
                 @forelse (Cart::content() as $item)
                     <li class="flex p-2 border-b border-gray-200">
-                        <img class="h-15 w-20 object-center object-cover mr-4" src="{{ $item->options->image }}">
+                        @if(!is_null($item->options->image))
+                            <img class="h-15 w-20 object-center object-cover mr-4" src="{{ $item->options->image }}">
+                        @else
+                            <img class="h-15 w-20 object-center object-cover mr-4" src="{{ asset('img/no_imagen.png') }}" alt="">
+                        @endif
                         <article class="flex-1">
                             <h1 class="font-bold text-xs">{{ Str::limit($item->name, 40, '...') }}</h1>
                             <p>Cantidad: {{ $item->qty }}</p>

@@ -41,7 +41,7 @@ class CategoryFilter extends Component
         //         $query->where('name', $this->marca);
         //     });
         // }
-        $productsQuery = $productsQuery->where('status', 1);
+        $productsQuery = $productsQuery->where('status', '!=', '0');
         $products = $productsQuery->paginate(12);
         return view('livewire.category-filter', compact('products'));
     }

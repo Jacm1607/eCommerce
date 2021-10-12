@@ -26,7 +26,7 @@ class SubcategoryFilter extends Component
         if ($this->orderBy) {
             $productsQuery = $productsQuery->orderBy('name',$this->orderBy);
         }
-        $productsQuery=$productsQuery->where('status',1);
+        $productsQuery=$productsQuery->where('status', '!=', '0');
         $products = $productsQuery->paginate(12);
         return view('livewire.subcategory-filter',compact('products'));
     }
