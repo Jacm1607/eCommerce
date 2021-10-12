@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,8 @@ Route::get('categories/{category}', [CategoryController::class, 'show'])->name('
 Route::get('subcategories/{subcategory}', [SubcategoryController::class, 'show'])->name('subcategories.show');
 
 Route::get('product/{product}',[ProductController::class, 'show'])->name('product.show');
+
+Route::get('search', SearchController::class)->name('search');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
