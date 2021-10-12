@@ -24,9 +24,9 @@
                                             {{ Str::limit($product->name, 25, '...') }}</p>
                                         <p class="text-sm font-bold text-cyan-800 mt-0">Bs.
                                             @if ($product->offer_price > 0 && !is_null($product->offer_price))
-                                                {{ number_format((float) $product->offer_price, 2, '.', '') }}
+                                                {{ number_format((float) $product->offer_price, 2, '.', ' ') }}
                                             @else
-                                                {{ number_format((float) $product->price, 2, '.', '') }}
+                                                {{ number_format((float) $product->price, 2, '.', ' ') }}
                                             @endif
                                         </p>
                                     </div>

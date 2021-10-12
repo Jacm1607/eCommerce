@@ -29,14 +29,14 @@
                                             </span>
                                             @if ($product->offer_price > 0 && !is_null($product->offer_price))
                                                 <span class="mr-3 text-xs line-through">Bs.
-                                                    {{ number_format((float) $product->price, 2, '.', '') }}
+                                                    {{ number_format((float) $product->price, 2, '.', ' ') }}
                                                 </span>
                                                 <span class="mr-3 text-sm font-bold text-blueGray-900">Bs.
-                                                    {{ number_format((float) $product->offer_price, 2, '.', '') }}
+                                                    {{ number_format((float) $product->offer_price, 2, '.', ' ') }}
                                                 </span>
                                             @else
                                                 <span class="mr-3 text-sm">Bs.
-                                                    {{ number_format((float) $product->price, 2, '.', '') }}
+                                                    {{ number_format((float) $product->price, 2, '.', ' ') }}
                                                 </span>
                                             @endif
 

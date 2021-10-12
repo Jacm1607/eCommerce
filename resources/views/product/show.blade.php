@@ -81,9 +81,9 @@
                     <p class="font-semibold">Marca: <span class="capitalize">{{ $product->brand->name }}</span></p>
                 </div>
                 @if ($product->offer_price > 0 && !is_null($product->offer_price))
-                    <p class="my-4"><span class="bg-white px-2.5 py-1.5 rounded-lg shadow-sm line-through text-xs font-semibold text-gray-500 ">Bs. {{ number_format((float)$product->price, 2, '.', '') }}</span> <span class="bg-teal-500 text-sm text-white px-2.5 py-1.5 rounded-xl shadow-sm font-bold">Bs. {{ number_format((float)$product->offer_price, 2, '.', '') }}</span></p>
+                    <p class="my-4"><span class="bg-white px-2.5 py-1.5 rounded-lg shadow-sm line-through text-xs font-semibold text-gray-500 ">Bs. {{ number_format((float)$product->price, 2, '.', ' ') }}</span> <span class="bg-teal-500 text-sm text-white px-2.5 py-1.5 rounded-xl shadow-sm font-bold">Bs. {{ number_format((float)$product->offer_price, 2, '.', ' ') }}</span></p>
                 @else
-                    <p class="text-2xl font-semibold text-gray-800 my-4">Bs. {{ number_format((float)$product->price, 2, '.', '') }}</p>
+                    <p class="text-2xl font-semibold text-gray-800 my-4">Bs. {{ number_format((float)$product->price, 2, '.', ' ') }}</p>
                 @endif
                 <div class="bg-lime-500 rounded-lg shadow mb-6">
                     <div class="p-4 flex items-center">
