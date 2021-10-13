@@ -70,7 +70,7 @@
                         <form target="shopping_hauscenter" id="shopping_hausc" name="f_shopping_hauscenter" autocomplete="off" action="https://www.livees.net/Checkout/api4" method="post" class="flex justify-end">
                             <input type="hidden" name="_" id="_" value="{{ env('LIVEES_CHECKOUT_TOKEN') }}" required readonly>
                             <input type="hidden" name="__" id="__" value="{{ env('LIVEES_CHECKOUT_KEY') }}" required readonly>
-                            <input type="hidden" name="postURL" id="postURL" value="#" required  readonly>
+                            <input type="hidden" name="postURL" id="postURL" value="{{ route('order.success') }}" required  readonly>
                             <input type="hidden" name="amt2" value="{{ $order->total }}" required readonly>
                             <input type="hidden" name="currency" value="BOB" required readonly>
                             <input type="hidden" name="invno" value="{{ $order->id }}" required readonly>
@@ -116,7 +116,9 @@
                     <p class="text-sm font-semibold text-right">Envío: Bs. {{ $order->shipping_cost }}</p>
                     <p class="text-lg font-semibold uppercase text-right">Total: Bs. {{ $order->total }}</p>
                     <p class="text-right">
-                        <x-jet-button href="#">Completar compra</x-jet-button>
+                        <a href="{{ route('order.success') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                            Completar compra
+                        </a>
                     </p>
                 </div>
             </div>
