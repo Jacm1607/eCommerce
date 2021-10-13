@@ -38,12 +38,12 @@ class Order extends Model
 
     public function delivery_method()
     {
-        return $this->belongsTo(DeliveryMethod::class);
+        return $this->belongsTo(DeliveryMethod::class, 'delivery_method_id', 'id');
     }
 
     public function pay_method()
     {
-        return $this->belongsTo(PayMethod::class);
+        return $this->belongsTo(PayMethod::class, 'pay_method_id', 'id');
     }
     public function items()
     {

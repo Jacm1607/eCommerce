@@ -28,7 +28,6 @@ class AddCartItem extends Component
         else {
             $price = $this->product->price;
         }
-
             Cart::add([
             'id' => $this->product->id,
             'name' => $this->product->name,
@@ -41,6 +40,7 @@ class AddCartItem extends Component
         $this->reset('qty');
         $this->emitTo('dropdown-cart', 'render');
         $this->emitTo('cart-mobile', 'render');
+        $this->dispatchBrowserEvent('item-add');
     }
     public function render()
     {

@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {{-- FlexSlider --}}
     <script src="{{ asset('vendor/FlexSlider/jquery.flexslider-min.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
 <x-app-layout>
     <div class="container py-8"  x-data="modal()" :class="{'overflow-y-hidden': open}">
@@ -127,6 +128,22 @@
                     animation: "slide",
                     controlNav: "thumbnails"
                 });
+                window.addEventListener('item-add', () => {
+                    Swal.fire({
+                        // title: '',
+                        text: "Producto añadido correctamente al carrito.",
+                        icon: 'success',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#34495E',
+                        confirmButtonText: 'Ir al carrito',
+                        cancelButtonText: 'Continuar comprando'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = ("{{ route('shopping-cart') }}")
+                        }
+                    })
+                })
             });
             function modal() {
                 return {
