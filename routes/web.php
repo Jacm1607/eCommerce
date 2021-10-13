@@ -38,10 +38,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('orders/create', FormOrder01::class)->name('orders.create');
     Route::get('orders/registration', FormOrder02::class)->name('orders.registration');
     Route::get('orders/{order}/payment', [OrderController::class, 'payment'])->name('orders.resume');
-    // Route::get('order/success', [OrderController::class , 'success'])->name('order.success');
-    // Route::get('order/index', [OrderController::class , 'index'])->name('order.index');
-    // Route::get('order/{order}/show', [OrderController::class , 'show'])->name('order.show');
-    // Route::get('order/{order}/pdf', [OrderController::class , 'stream_pdf'])->name('order.pdf');
+    Route::get('order/success', [OrderController::class , 'success'])->name('order.success');
+    Route::get('order/index', [OrderController::class , 'index'])->name('order.index');
+    Route::get('order/{order}/show', [OrderController::class , 'show'])->name('order.show');
+    Route::get('order/{order}/pdf', [OrderController::class , 'stream_pdf'])->name('order.pdf');
 });
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

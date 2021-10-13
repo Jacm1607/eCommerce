@@ -32,7 +32,7 @@
                             Administrar cuenta
                         </div>
 
-                        <x-jet-dropdown-link href="#">
+                        <x-jet-dropdown-link href="{{ route('order.index') }}">
                             Mis Pedidos
                         </x-jet-dropdown-link>
 

@@ -14,7 +14,9 @@
         "laravel/jetstream": "^2.4",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.5"
+        "livewire/livewire": "^2.5",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "barryvdh/laravel-dompdf": "^0.9.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
