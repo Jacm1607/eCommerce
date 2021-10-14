@@ -8,7 +8,11 @@
                 <div class="p-3">
                     <p class="text-2xl">Pago completado correctamente</p>
                     <p>En estos momentos se iniciará la gestión de tu compra, nos comunicaremos contigo dentro de las primeras 24hrs. hábiles. También puedes enviarnos un whatsapp al <a class="text-lime-600 font-bold" target="_blank" href="https://wa.link/eekfh9">(+591) 650-69-921</a>. Gracias por comprar en <b>Hauscenter eCommerce.</b></p>
-                    <p class="text-right"><x-success-button href="{{ route('order.index') }}">Ver mi pedido</x-success-button></p>
+                    <p class="text-right">
+                        <a href="{{ route('order.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                            Ver mi pedido
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>
