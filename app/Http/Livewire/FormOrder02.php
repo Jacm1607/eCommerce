@@ -119,7 +119,7 @@ class FormOrder02 extends Component
         }
         $order->address = $order_address;
         $order->save();
-        Session::put('payment',true);
+        Session::put('pay',true);
         return redirect()->route('orders.resume', $order);
     }
 

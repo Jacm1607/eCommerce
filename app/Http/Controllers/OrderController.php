@@ -24,9 +24,10 @@ class OrderController extends Controller
 
     public function success(Request $request)
     {
-        if (Session::has('payment')) {
+        if (Session::has('pay')) {
             $user = User::find(auth()->user()->id);
-            Session::forget('payment');
+            // Session::forget('pay');
+            // Session::forget('data_order');
             $order = Order::findOrFail($request->result);
             $order->status = Order::RECIBIDO;
             $order->api_order_id = $request->order_id;
