@@ -1,11 +1,12 @@
-<header class="bg-white sticky top-0 z-50" x-data="dropdown()">
-    <div class="container flex items-center h-16 justify-between md:justify-start">
+<header class="bg-gray-100 sticky top-0 z-50 mx-4 py-4" x-data="dropdown()">
+    <div class="container bg-white shadow-lg rounded-lg flex items-center h-16 justify-between md:justify-start">
         <a :class="{'bg-opacity-100 text-lightBlue-700' : open }" x-on:click="show()"
-            class="flex flex-col items-center justify-center order-last md:order-first px-6 md:px-4 bg-blue-900 opacity-90 text-white cursor-pointer font-semibold h-full">
-            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+            class="flex flex-col items-center justify-center order-last md:order-first px-6 md:px-4 bg-blueGray-800 text-white cursor-pointer font-semibold h-full">
+            {{-- <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            </svg> --}}
+            <span class="material-icons-outlined">apps</span>
             <span class="text-sm hidden md:block">Categorías</span>
         </a>
         <a href="/" class="mx-6">
@@ -58,7 +59,10 @@
             @else
                 <x-jet-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <i class="fas fa-user-circle text-blueGray-700 opacity-40 text-3xl cursor-pointer"></i>
+                        <span class="material-icons-outlined text-blueGray-700 opacity-40 text-3xl cursor-pointer">
+                            login
+                        </span>
+                        {{-- <i class="fas fa-user-circle text-blueGray-700 opacity-40 text-3xl cursor-pointer"></i> --}}
                     </x-slot>
 
                     <x-slot name="content">
@@ -77,7 +81,7 @@
         </div>
     </div>
 
-    <nav :class="{ 'hidden' : !open , 'block' : open}" x-show="open" id="navigation-menu" class="bg-blueGray-700 bg-opacity-25 w-full absolute hidden">
+    <nav :class="{ 'hidden' : !open , 'block' : open}" x-show="open" id="navigation-menu" class="bg-blueGray-700 bg-opacity-25 w-full absolute hidden rounded-lg">
         {{-- Menu desktop --}}
         <div class="container h-full hidden md:block">
             <div x-on:click.away="close()" class="grid grid-cols-4 h-full relative">

@@ -11,6 +11,9 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
+    {{-- Icons --}}
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
@@ -24,7 +27,7 @@
     @yield('script')
 
     <!-- Icons -->
-    <script src="https://kit.fontawesome.com/71b57ea171.js" crossorigin="anonymous"></script>
+    {{-- <script src="https://kit.fontawesome.com/71b57ea171.js" crossorigin="anonymous"></script> --}}
 
 </head>
 
