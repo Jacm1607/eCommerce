@@ -33,6 +33,10 @@
                             Administrar cuenta
                         </div>
 
+                        <x-jet-dropdown-link href="{{ route('admin.index') }}">
+                            Administrador
+                        </x-jet-dropdown-link>
+
                         <x-jet-dropdown-link href="{{ route('order.index') }}">
                             Mis Pedidos
                         </x-jet-dropdown-link>
