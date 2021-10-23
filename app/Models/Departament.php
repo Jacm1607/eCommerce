@@ -12,7 +12,7 @@ class Departament extends Model
 
     public function provincies()
     {
-        return $this->hasMany(Provice::class);
+        return $this->hasMany(Province::class);
     }
 
     public function orders()

@@ -9,9 +9,9 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Livewire\Admin\ShowCategory;
 use App\Http\Livewire\Admin\BrandComponent;
+use App\Http\Livewire\Admin\DepartamentComponent;
+use App\Http\Livewire\Admin\ShowDepartament;
 
-// use App\Http\Livewire\Admin\DepartmentComponent;
-// use App\Http\Livewire\Admin\ShowDepartment;
 // use App\Http\Livewire\Admin\CityComponent;
 // use App\Http\Livewire\Admin\UserComponent;
 
@@ -30,8 +30,8 @@ Route::get('categories/{category}', ShowCategory::class)->name('admin.categories
 
 Route::get('brands', BrandComponent::class)->name('admin.brands.index');
 
-// Route::get('departments', DepartmentComponent::class)->name('admin.departments.index');
-// Route::get('departments/{department}', ShowDepartment::class)->name('admin.departments.show');
+Route::get('departments', DepartamentComponent::class)->name('admin.departaments.index');
+Route::get('departments/{department}', ShowDepartament::class)->name('admin.departments.show');
 
 // Route::get('cities/{city}', CityComponent::class)->name('admin.cities.show');
 
