@@ -1,7 +1,7 @@
-@section('script')
+<!-- @section('script')
     {{-- sweetalert2 --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@endsection
+@endsection -->
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight capitalize">
@@ -141,7 +141,7 @@
         </x-jet-dialog-modal>
     </div>
 
-    @push('js')
+    <!-- @push('js')
         <script>
             Livewire.on('deleteCity', cityId => {
 
@@ -165,5 +165,5 @@
                 })
             });
         </script>
-    @endpush
+    @endpush -->
 </div>

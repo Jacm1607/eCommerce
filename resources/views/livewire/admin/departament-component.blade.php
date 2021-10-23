@@ -1,7 +1,7 @@
-@section('script')
+<!-- @section('script')
     {{-- sweetalert2 --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@endsection
+@endsection -->
 <div class="container py-12">
     {{-- Agregar departamento --}}
     <x-jet-form-section submit="save" class="mb-6">
@@ -70,7 +70,7 @@
                             <td class="py-2">
                                 <div class="flex divide-x divide-gray-300 font-semibold">
                                     <a class="pr-2 hover:text-blue-600 cursor-pointer" wire:click="edit({{$department}})">Editar</a>
-                                    {{-- <a class="pl-2 hover:text-red-600 cursor-pointer" wire:click="$emit('deleteDepartment', {{$department->id}})">Eliminar</a> --}}
+                                    <!-- <a class="pl-2 hover:text-red-600 cursor-pointer" wire:click="$emit('deleteDepartment', {{$department->id}})">Eliminar</a> -->
                                 </div>
                             </td>
                         </tr>
@@ -114,7 +114,7 @@
 
     </x-jet-dialog-modal>
 
-    @push('js')
+    <!-- @push('js')
         <script>
             Livewire.on('deleteDepartment', departmentId => {
 
@@ -138,5 +138,5 @@
                 })
             });
         </script>
-    @endpush
+    @endpush -->
 </div>
