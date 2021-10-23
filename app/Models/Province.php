@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Province extends Model
 {
     use HasFactory;
-    protected $fillable = ['departament_id', 'name', 'province_order'];
+    protected $fillable = ['departament_id', 'name', 'cost', 'province_order'];
 
     public function municipalities()
     {
