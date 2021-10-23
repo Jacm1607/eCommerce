@@ -5,15 +5,10 @@ use App\Http\Livewire\Admin\ShowProducts;
 use App\Http\Livewire\Admin\CreateProducts;
 use App\Http\Livewire\Admin\EditProducts;
 use App\Http\Controllers\Admin\ProductController;
-
-use App\Http\Controllers\CategoryController;
-
-
 // use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Livewire\Admin\ShowCategory;
-
-// use App\Http\Livewire\Admin\BrandComponent;
+use App\Http\Livewire\Admin\BrandComponent;
 
 // use App\Http\Livewire\Admin\DepartmentComponent;
 // use App\Http\Livewire\Admin\ShowDepartment;
@@ -33,7 +28,7 @@ Route::post('products/{product}/files', [ProductController::class, 'files'])->na
 Route::get('categories', [AdminCategoryController::class, 'index'])->name('admin.categories.index');
 Route::get('categories/{category}', ShowCategory::class)->name('admin.categories.show');
 
-// Route::get('brands', BrandComponent::class)->name('admin.brands.index');
+Route::get('brands', BrandComponent::class)->name('admin.brands.index');
 
 // Route::get('departments', DepartmentComponent::class)->name('admin.departments.index');
 // Route::get('departments/{department}', ShowDepartment::class)->name('admin.departments.show');
