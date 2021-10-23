@@ -5,7 +5,7 @@ use App\Http\Livewire\Admin\ShowProducts;
 use App\Http\Livewire\Admin\CreateProducts;
 use App\Http\Livewire\Admin\EditProducts;
 use App\Http\Controllers\Admin\ProductController;
-// use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Livewire\Admin\ShowCategory;
 use App\Http\Livewire\Admin\BrandComponent;
@@ -22,8 +22,8 @@ Route::get('products/create', CreateProducts::class)->name('admin.products.creat
 Route::get('products/{product}/edit', EditProducts::class)->name('admin.products.edit');
 Route::post('products/{product}/files', [ProductController::class, 'files'])->name('admin.products.files');
 
-// Route::get('orders', [OrderController::class, 'index'])->name('admin.orders.index');
-// Route::get('orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
+Route::get('orders', [OrderController::class, 'index'])->name('admin.orders.index');
+Route::get('orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
 
 Route::get('categories', [AdminCategoryController::class, 'index'])->name('admin.categories.index');
 Route::get('categories/{category}', ShowCategory::class)->name('admin.categories.show');

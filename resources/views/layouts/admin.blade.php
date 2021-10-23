@@ -27,7 +27,7 @@
     @yield('script')
 
     <!-- Icons -->
-    {{-- <script src="https://kit.fontawesome.com/71b57ea171.js" crossorigin="anonymous"></script> --}}
+    <script src="https://kit.fontawesome.com/71b57ea171.js" crossorigin="anonymous"></script>
 
 </head>
 
