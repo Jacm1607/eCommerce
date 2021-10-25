@@ -18,7 +18,6 @@ class CreateCategory extends Component
     protected $listeners = ['delete'];
 
     public $createForm = [
-
         'name' => null,
         'slug' => null,
         'icon' => null,
@@ -58,33 +57,37 @@ class CreateCategory extends Component
         'editForm.brands' => 'marcas'
     ];
 
-    public function mount(){
+    public function mount()
+    {
         $this->getBrands();
         $this->getCategories();
         $this->rand = rand();
     }
 
-    public function updatedCreateFormName($value){
+    public function updatedCreateFormName($value)
+    {
         $this->createForm['slug'] = Str::slug($value);
     }
 
-    public function updatedEditFormName($value){
+    public function updatedEditFormName($value)
+    {
         $this->editForm['slug'] = Str::slug($value);
     }
 
-    public function getBrands(){
+    public function getBrands()
+    {
         $this->brands = Brand::all();
     }
 
-    public function getCategories(){
-        $this->categories = Category::all();
+    public function getCategories()
+    {
+        $this->categories = Category::where('category_status', '1')->get();
     }
 
-    public function save(){
+    public function save()
+    {
         $this->validate();
-
-        $image = $this->createForm['image']->store('categories');
-
+        $image = $this->createForm['image']->store('public/categories');
         $category = Category::create([
             'name' => $this->createForm['name'],
             'slug' => $this->createForm['slug'],
@@ -101,13 +104,11 @@ class CreateCategory extends Component
         $this->emit('saved');
     }
 
-    public function edit(Category $category){
-
+    public function edit(Category $category)
+    {
         $this->reset(['editImage']);
         $this->resetValidation();
-
         $this->category = $category;
-
         $this->editForm['open'] = true;
         $this->editForm['name'] = $category->name;
         $this->editForm['slug'] = $category->slug;
@@ -116,37 +117,32 @@ class CreateCategory extends Component
         $this->editForm['brands'] = $category->brands->pluck('id');
     }
 
-    public function update(){
-
+    public function update()
+    {
         $rules = [
             'editForm.name' => 'required',
             'editForm.slug' => 'required|unique:categories,slug,' . $this->category->id,
             'editForm.icon' => 'required',
             'editForm.brands' => 'required',
         ];
-
         if ($this->editImage) {
             $rules['editImage'] = 'required|image|max:1024';
         }
-
         $this->validate($rules);
-
         if ($this->editImage) {
             Storage::delete($this->editForm['image']);
-            $this->editForm['image'] = $this->editImage->store('categories');
+            $this->editForm['image'] = $this->editImage->store('public/categories');
         }
-
         $this->category->update($this->editForm);
-
         $this->category->brands()->sync($this->editForm['brands']);
-
         $this->reset(['editForm', 'editImage']);
-
         $this->getCategories();
     }
 
-    public function delete(Category $category){
-        $category->delete();
+    public function delete(Category $category)
+    {
+        $category->update(['category_status' => '0']);
+        // $category->delete();
         $this->getCategories();
     }
     public function render()

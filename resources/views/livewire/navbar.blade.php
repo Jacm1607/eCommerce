@@ -10,7 +10,6 @@
             <span class="text-sm hidden md:block">Categorías</span>
         </a>
         <a href="/" class="mx-6">
-            {{-- <img src="{{ asset('img/hauslogo-2.svg') }}" class="h-9 w-auto" alt=""> --}}
             <x-jet-application-mark class="block h-9 w-auto" />
         </a>
         <div class="flex-1 hidden md:block">

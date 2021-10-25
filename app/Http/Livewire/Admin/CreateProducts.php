@@ -30,7 +30,7 @@ class CreateProducts extends Component
     ];
 
     public function updatedCategoryId($value){
-        $this->subcategories = Subcategory::where('category_id', $value)->get();
+        $this->subcategories = Subcategory::where('category_id', $value)->where('subcategory_status', '1')->get();
         $this->brands = Brand::whereHas('categories', function(Builder $query) use ($value){
             $query->where('category_id', $value);
         })->get();
@@ -46,7 +46,7 @@ class CreateProducts extends Component
     }
 
     public function mount(){
-        $this->categories = Category::all();
+        $this->categories = Category::where('category_status', '1')->get();
     }
 
     public function save(){

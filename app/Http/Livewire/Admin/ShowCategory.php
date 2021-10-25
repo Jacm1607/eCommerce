@@ -6,37 +6,47 @@ use App\Models\Category;
 use App\Models\Subcategory;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class ShowCategory extends Component
 {
-    public $category, $subcategories, $subcategory;
+    use WithFileUploads;
+    public $category, $subcategories, $subcategory, $rand;
 
     protected $listeners = ['delete'];
 
     protected $rules = [
         'createForm.name' => 'required',
         'createForm.slug' => 'required|unique:subcategories,slug',
+        'createForm.image' => 'required|image|max:1024',
     ];
 
     protected $validationAttributes = [
         'createForm.name' => 'nombre',
         'createForm.slug' => 'slug',
+        'createForm.image' => 'imagen',
     ];
+
+    public $editImage;
 
     public $createForm = [
         'name' => null,
         'slug' => null,
+        'image' => null
     ];
 
     public $editForm = [
         'open' => false,
         'name' => null,
         'slug' => null,
+        'image' => null,
     ];
 
     public function mount(Category $category){
         $this->category = $category;
         $this->getSubcategories();
+        $this->rand = rand();
     }
 
     public function updatedCreateFormName($value){
@@ -53,7 +63,14 @@ class ShowCategory extends Component
 
     public function save(){
         $this->validate();
-        $this->category->subcategories()->create($this->createForm);
+        $image = $this->createForm['image']->store('public/subcategories');
+        $this->category->subcategories()->create(
+            [
+                'name' => $this->createForm['name'],
+                'slug' => $this->createForm['slug'],
+                'image' => $image
+            ]
+        );
         $this->reset('createForm');
         $this->getSubcategories();
     }
@@ -67,6 +84,7 @@ class ShowCategory extends Component
         $this->editForm['open'] = true;
         $this->editForm['name'] = $subcategory->name;
         $this->editForm['slug'] = $subcategory->slug;
+        $this->editForm['image'] = $subcategory->image;
 
     }
 
@@ -75,7 +93,14 @@ class ShowCategory extends Component
             'editForm.name' => 'required',
             'editForm.slug' => 'required|unique:subcategories,slug,' . $this->subcategory->id,
         ]);
-
+        if ($this->editImage) {
+            $rules['editImage'] = 'required|image|max:1024';
+        }
+        $this->validate($rules);
+        if ($this->editImage) {
+            Storage::delete($this->editForm['image']);
+            $this->editForm['image'] = $this->editImage->store('public/categories');
+        }
         $this->subcategory->update($this->editForm);
 
         $this->getSubcategories();
@@ -85,8 +110,7 @@ class ShowCategory extends Component
 
     public function delete($id){
         $subcategory = Subcategory::findOrFail($id);
-        $subcategory->subcategory_status = "0";
-        $subcategory->update();
+        $subcategory->update(['subcategory_status' => '0']);
         $this->getSubcategories();
     }
 

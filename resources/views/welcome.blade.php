@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.1.6/dist/js/splide.min.js"></script>
 @endsection
 <x-app-layout>
-    <div class="container">
+    <!-- <div class="container">
         <div class="splide" data-splide='{"type":"loop","autoplay": true}'>
             <div class="splide__track">
                   <ul class="splide__list">
@@ -38,7 +38,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="container py-8">
         @foreach ($categories as $category)
             <section class="mb-6">

@@ -33,7 +33,14 @@
                 <x-jet-input disabled wire:model="createForm.slug" type="text" class="w-full mt-1 bg-gray-100" />
                 <x-jet-input-error for="createForm.slug" />
             </div>
+            <div class="col-span-6 sm:col-span-4">
+                <x-jet-label>
+                    Imagen
+                </x-jet-label>
 
+                <input wire:model="createForm.image" accept="image/*" type="file" class="mt-1" name="" id="{{$rand}}">
+                <x-jet-input-error for="createForm.image" />
+            </div>
 
         </x-slot>
 
@@ -75,7 +82,7 @@
                         <tr>
                             <td class="py-2">
 
-                                <a href="{{route('admin.categories.show', $subcategory)}}" class="uppercase">
+                                <a class="uppercase">
                                     {{$subcategory->name}}
                                 </a>
                             </td>
@@ -125,6 +132,15 @@
                     <x-jet-input disabled wire:model="editForm.slug" type="text" class="w-full mt-1 bg-gray-100" />
                     <x-jet-input-error for="editForm.slug" />
                 </div>
+
+                <div>
+                    <x-jet-label>
+                        Imagen
+                    </x-jet-label>
+
+                    <input wire:model="editImage" accept="image/*" type="file" class="mt-1" name="" id="{{$rand}}">
+                    <x-jet-input-error for="editImage" />
+                </div>
             </div>
         </x-slot>
 
@@ -138,8 +154,7 @@
 
     @push('js')
         <script>
-            Livewire.on('deleteSubcategory', subcategoryId => {
-
+            Livewire.on('deleteSubcategory', subcategory => {
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -150,7 +165,7 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Livewire.emitTo('admin.show-category', 'delete', subcategoryId)
+                        Livewire.emitTo('admin.show-category', 'delete', subcategory)
                         Swal.fire(
                             'Deleted!',
                             'Your file has been deleted.',
