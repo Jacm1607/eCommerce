@@ -32,11 +32,11 @@
                         <div class="block px-4 py-2 text-xs text-gray-400">
                             Administrar cuenta
                         </div>
-
-                        <x-jet-dropdown-link href="{{ route('admin.index') }}">
-                            Administrador
-                        </x-jet-dropdown-link>
-
+                        @role('admin')
+                            <x-jet-dropdown-link href="{{ route('admin.index') }}">
+                                Administrador
+                            </x-jet-dropdown-link>
+                        @endrole
                         <x-jet-dropdown-link href="{{ route('order.index') }}">
                             Mis Pedidos
                         </x-jet-dropdown-link>
