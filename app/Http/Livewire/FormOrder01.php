@@ -12,7 +12,7 @@ class FormOrder01 extends Component
 {
     public $section_method_delivery = false;
 
-    public $name, $lastname, $ci , $email, $cellphone, $razon_social, $nit;
+    public $name, $lastname, $ci , $email, $cellphone, $razon_social, $nit, $cost_delivery = 0.00;
 
     public $departaments, $provinces = [], $municipalities = [],  $delivery_methods = [];
 
@@ -54,6 +54,8 @@ class FormOrder01 extends Component
 
     public function updatedProvinceId( $value )
     {
+        $cost = Province::findOrFail($value);
+        $this->cost_delivery = $cost->cost;
         $this->municipalities = Municipality::where('province_id',$value)->get();
     }
 
@@ -72,6 +74,7 @@ class FormOrder01 extends Component
             'municipality_id' => intval($this->municipality_id),
             'razon_social' => (!empty($this->razon_social)) ? strtoupper($this->razon_social) : strtoupper("$this->name $this->lastname"),
             'nit' => $this->nit ?? $this->ci,
+            'cost_delivery' => $this->cost_delivery
         ];
         Session::put('data_order',$data_order);
         return redirect()->route('orders.registration');

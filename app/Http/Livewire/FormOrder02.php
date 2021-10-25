@@ -97,8 +97,8 @@ class FormOrder02 extends Component
         $order->status = 1;
         $order->delivery_method_id= $this->method_delivery_id;
         $order->pay_method_id= $this->method_pay_id;
-        $order->shipping_cost = 0;
-        $order->total = number_format((float)Cart::subtotal(), 2, '.', '');
+        $order->shipping_cost = $data_order['cost_delivery'];
+        $order->total = number_format((float)Cart::subtotal() + $data_order['cost_delivery'], 2, '.', '');
         $order->content = Cart::content();
 
         //RETIRO EN TIENDA

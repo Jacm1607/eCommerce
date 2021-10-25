@@ -12,7 +12,7 @@
             @endforelse
         </ul>
         <div class="mt-4">
-            {{ $products->links() }}
+            {{ $products->appends(request()->query())->links() }}
         </div>
     </div>
 </x-app-layout>

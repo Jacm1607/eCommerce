@@ -48,9 +48,9 @@
                                     </article>
                                 </div>
                             </td>
-                            <td class="text-center"> Bs. {{ $item->price }}</td>
+                            <td class="text-center"> Bs. {{ number_format((float)$item->price, 2, '.', ' ') }}</td>
                             <td class="text-center">{{ $item->qty }}</td>
-                            <td class="text-center">Bs. {{ $item->qty * $item->price }}</td>
+                            <td class="text-center">Bs. {{ number_format((float)$item->qty * $item->price, 2, '.', ' ') }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -63,9 +63,9 @@
                 </div>
                 <div class="md:col-span-1 col-span-2">
                     <div class="text-gray-700">
-                        <p class="text-sm font-semibold text-right">Subtotal: Bs. {{ $order->total - $order->shipping_cost }}</p>
-                        <p class="text-sm font-semibold text-right">Envío: Bs. {{ $order->shipping_cost }}</p>
-                        <p class="text-lg font-semibold uppercase text-right">Total: Bs. {{ $order->total }}</p>
+                        <p class="text-sm font-semibold text-right">Subtotal: Bs. {{ number_format((float)$order->total - $order->shipping_cost, 2, '.', ' ') }}</p>
+                        <p class="text-sm font-semibold text-right">Envío: Bs. {{ number_format((float)$order->shipping_cost, 2, '.', ' ') }}</p>
+                        <p class="text-lg font-semibold text-right">TOTAL: Bs. {{ number_format((float)$order->total, 2, '.', ' ') }}</p>
 
                         <form target="shopping_hauscenter" id="shopping_hausc" name="f_shopping_hauscenter" autocomplete="off" action="https://www.livees.net/Checkout/api4" method="post" class="flex justify-end">
                             <input type="hidden" name="_" id="_" value="{{ env('LIVEES_CHECKOUT_TOKEN') }}" required readonly>
@@ -112,9 +112,9 @@
         @else
             <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-3">
                 <div class="text-gray-700">
-                    <p class="text-sm font-semibold text-right">Subtotal: Bs. {{ $order->total - $order->shipping_cost }}</p>
-                    <p class="text-sm font-semibold text-right">Envío: Bs. {{ $order->shipping_cost }}</p>
-                    <p class="text-lg font-semibold uppercase text-right">Total: Bs. {{ $order->total }}</p>
+                    <p class="text-sm font-semibold text-right">Subtotal: Bs. {{ number_format((float)$order->total - $order->shipping_cost, 2, '.', ' ') }}</p>
+                    <p class="text-sm font-semibold text-right">Envío: Bs. {{ number_format((float)$order->shipping_cost, 2, '.', ' ') }}</p>
+                    <p class="text-lg font-semibold text-right">TOTAL: Bs. {{ number_format((float)$order->total, 2, '.', ' ') }}</p>
                     <p class="text-right">
                         <a href="{{ route('order.success', ['result' => $order->id, 'order_id' => 'CONTENT'.$order->id ] ) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
                             Completar compra

@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-span-1">
                         <div>
-                            <x-jet-label value="Provicia*" />
+                            <x-jet-label value="Provincia*" />
                             <select wire:model="province_id" wire:loading.attr="disabled" wire:target="departament_id" class="form-control w-full rounded-md">
                                 <option value="" hidden selected>Seleccione una opción</option>
                                 @foreach ($provinces as $province)
@@ -94,10 +94,10 @@
                 </div>
             </div>
 
-            <div>
+            <div class="flex justify-end">
                 <x-jet-button wire:click="create_order" class="mt-4 mb-6">Continuar con la compra</x-jet-button>
                 <hr>
-                <p class="mt-2 text-sm text-gray-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit delectus tenetur dolor nam itaque non a culpa iste modi eos cum, eaque asperiores ipsam hic debitis reprehenderit sequi esse optio. <a href="#" class="font-semibold text-lightBlue-700">Politicas y privacidad</a></p>
+                <!-- <p class="mt-2 text-sm text-gray-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit delectus tenetur dolor nam itaque non a culpa iste modi eos cum, eaque asperiores ipsam hic debitis reprehenderit sequi esse optio. <a href="#" class="font-semibold text-lightBlue-700">Politicas y privacidad</a></p> -->
             </div>
         </div>
         <div class="col-span-2">
@@ -126,14 +126,14 @@
                     </p>
                     <p class="flex justify-between">
                         Envío
-                        <span>Gratis</span>
+                        <span>{{ number_format((float)$cost_delivery, 2, '.', ' ') }}</span>
                     </p>
                 </div>
                 <hr class="mt-1 mb-2">
                 <div class="text-gray-600 px-6 py-4">
                     <p class="flex justify-between">
                         Total
-                        <span>Bs. {{ Cart::subtotal() }}</span>
+                        <span>Bs. {{ number_format((float)Cart::subtotal() + $cost_delivery, 2, '.', ' ') }}</span>
                     </p>
                 </div>
             </div>

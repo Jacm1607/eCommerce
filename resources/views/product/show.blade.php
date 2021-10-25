@@ -86,16 +86,20 @@
                 @else
                     <p class="text-2xl font-semibold text-gray-800 my-4">Bs. {{ number_format((float)$product->price, 2, '.', ' ') }}</p>
                 @endif
-                <div class="bg-lime-500 rounded-lg shadow mb-6">
-                    <div class="p-4 flex items-center">
-                        <span class="flex items-center justify-center w-10 h-10 rounded-full bg-white"><i class="fas fa-truck text-lime-500"></i></span>
-                        <div class="ml-4">
-                            <p class="text-white">Disponible envío para toda Bolivia</p>
-                            <p class="text-white text-xs uppercase tracking-widest">Recibe este producto a partir del {{ Date::now()->addDay(3)->locale('es')->format('l j F') }}</p>
+                @if ($product->status === '1')
+                    <div class="bg-lime-500 rounded-lg shadow mb-6">
+                        <div class="p-4 flex items-center">
+                            <span class="flex items-center justify-center w-10 h-10 rounded-full bg-white">
+                                <span class="material-icons-outlined text-lime-500">
+                                    local_shipping
+                                </span>
+                            </span>
+                            <div class="ml-4">
+                                <p class="text-white">Disponible envío para toda Bolivia</p>
+                                <p class="text-white text-xs uppercase tracking-widest">Recibe este producto a partir del {{ Date::now()->addDay(3)->locale('es')->format('l j F') }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                @if ($product->status === '1')
                     @livewire('add-cart-item', ['product' => $product])
                 @else
                     <div class="flex bg-red-100 rounded-lg p-4 mb-4 text-sm text-red-700" role="alert">
@@ -110,12 +114,6 @@
                     <p>{!! Str::limit($product->description, 700, '<button @click="show()">... <span class="text-lime-500 uppercase text-xs tracking-widest font-bold">Ver mas</span></button>') !!}</p>
                 @else
                     <p>Sin descripción por el momento.</p>
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="h-6 w-6 group-hover:opacity-50 opacity-70" fill="none"
-                                                viewBox="0 0 24 24" stroke="black">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                            </svg>
                 @endif
             </div>
         </div>

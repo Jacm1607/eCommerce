@@ -21,36 +21,44 @@
                             <td class="text-center">
                                 @switch($item->status)
                                     @case(1)
-                                        <div class="text-yellow-500 flex justify-center">
-                                            <i class="fas fa-clock"></i> <span class="ml-1 text-xs uppercase font-extrabold">Pendiente</span>
+                                        <div class="text-yellow-500 flex justify-center items-center">
+                                            <span class="material-icons-outlined">watch_later</span> <span class="ml-1 text-xs uppercase font-extrabold">Pendiente</span>
                                         </div>
                                         @break
                                     @case(2)
-                                        <div class="text-green-600 flex justify-center">
-                                            <i class="fas fa-check"></i> <span class="ml-1 text-xs uppercase font-extrabold">Orden recibida</span>
+                                        <div class="text-purple-600 flex justify-center items-center">
+                                            <span class="material-icons-outlined">inventory_2</span> <span class="ml-1 text-xs uppercase font-extrabold">Orden recibida</span>
                                         </div>
                                         @break
                                     @case(3)
-                                        <div class="text-lightBlue-800 flex justify-center">
-                                            <i class="fas fa-truck"></i> <span class="ml-1 text-xs uppercase font-extrabold">Enviado</span>
+                                        <div class="text-cyan-800 flex justify-center items-center">
+                                            <span class="material-icons-outlined">local_shipping</span> <span class="ml-1 text-xs uppercase font-extrabold">Enviado</span>
                                         </div>
                                         @break
                                     @case(4)
-                                        <div class="text-lime-600 flex justify-center">
-                                            <i class="fas fa-check-circle"></i></i> <span class="ml-1 text-xs uppercase font-extrabold">Entregado</span>
+                                        <div class="text-green-600 flex justify-center items-center">
+                                            <span class="material-icons-outlined">done</span> <span class="ml-1 text-xs uppercase font-extrabold">Entregado</span>
                                         </div>
                                         @break
-                                    @case(5)
-                                        <div class="text-red-600 flex justify-center">
-                                            <i class="fas fa-times-circle"></i></i> <span class="ml-1 text-xs uppercase font-extrabold">Anulado</span>
+                                    @case(0)
+                                        <div class="text-red-600 flex justify-center items-center">
+                                            <span class="material-icons-outlined">error</span> <span class="ml-1 text-xs uppercase font-extrabold">Anulado</span>
                                         </div>
                                         @break
                                 @endswitch
                             </td>
                             <td class="text-center flex justify-center">
                                 <div class="my-2">
-                                    <a href="{{ route('order.show', $item) }}" class="inline-flex items-center px-4 py-2 bg-lightBlue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-lightBlue-700 active:bg-lightBlue-900 focus:outline-none focus:border-lightBlue-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"><i class="fa fa-search"></i></a>
-                                    <a href="{{ route('order.pdf', $item) }}" class="inline-flex items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"><i class="fas fa-file-pdf"></i></a>
+                                    <a href="{{ route('order.show', $item) }}" class="inline-flex items-center p-0.5 bg-cyan-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-cyan-700 active:bg-cyan-900 focus:outline-none focus:border-cyan-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                                        <span class="material-icons-outlined">
+                                            preview
+                                        </span>
+                                    </a>
+                                    <a href="{{ route('order.pdf', $item) }}" class="inline-flex items-center p-0.5 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                                        <span class="material-icons-outlined">
+                                            picture_as_pdf
+                                        </span>
+                                    </a>
                                 </div>
                             </td>
                         </tr>

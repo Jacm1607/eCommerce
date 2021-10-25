@@ -76,8 +76,8 @@
                 <th scope="row">{{ $item->id }}</th>
                 <td>{{ $item->name }}</td>
                 <td align="right">{{ $item->qty }}</td>
-                <td align="right"> Bs. {{ $item->price }}</td>
-                <td align="right">Bs. {{ $item->qty * $item->price }}</td>
+                <td align="right"> Bs. {{ number_format((float)$item->price, 2, '.', ' ') }}</td>
+                <td align="right">Bs. {{ number_format((float)$item->qty * $item->price, 2, '.', ' ') }}</td>
             </tr>
         @endforeach
     </tbody>
@@ -85,18 +85,18 @@
     <tfoot>
         <tr>
             <td colspan="3"></td>
-            <td align="right">Subtotal Bs.</td>
-            <td align="right">{{ $total - $shipping_cost }}</td>
+            <td align="right">Subtotal</td>
+            <td align="right">Bs. {{ number_format((float)$total - $shipping_cost, 2, '.', ' ') }}</td>
         </tr>
         <tr>
             <td colspan="3"></td>
-            <td align="right">Costo de envío Bs.</td>
-            <td align="right">{{ $shipping_cost }}</td>
+            <td align="right">Costo de envío</td>
+            <td align="right">Bs. {{ number_format((float)$shipping_cost, 2, '.', ' ') }}</td>
         </tr>
         <tr>
             <td colspan="3"></td>
             <td align="right">Total </td>
-            <td align="right" class="gray">Bs. {{ $total }}</td>
+            <td align="right" class="gray">Bs. {{ number_format((float)$total, 2, '.', ' ') }}</td>
         </tr>
     </tfoot>
   </table>

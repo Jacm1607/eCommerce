@@ -8,11 +8,13 @@ use Livewire\Component;
 
 class AddCartItem extends Component
 {
-    public $product, $qty = 1;
+    public $product, $quantity;
+    public $qty = 1;
     public $options = [];
 
     public function mount()
     {
+        $this->quantity = qty_available($this->product->id);
         if(count($this->product->images) > 0) {
             $image = Storage::url($this->product->images->first()->url);
         } else {
@@ -20,6 +22,15 @@ class AddCartItem extends Component
         }
         $this->options['image'] = $image;
     }
+
+    public function decrement(){
+        $this->qty = $this->qty - 1;
+    }
+
+    public function increment(){
+        $this->qty = $this->qty + 1;
+    }
+
     public function addItem()
     {
         if ($this->product->offer_price > 0 && !is_null($this->product->offer_price)) {
@@ -38,6 +49,7 @@ class AddCartItem extends Component
         ]);
 
         $this->reset('qty');
+        $this->quantity = qty_available($this->product->id);
         $this->emitTo('dropdown-cart', 'render');
         $this->emitTo('cart-mobile', 'render');
         $this->dispatchBrowserEvent('item-add');
