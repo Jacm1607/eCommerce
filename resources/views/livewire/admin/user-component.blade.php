@@ -76,7 +76,7 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
-                                    <label>
+                                    <!-- <label>
                                         <input {{count($user->roles) ? 'checked' : ''}} value="1" type="radio" name="{{$user->email}}" wire:change="assignRole({{$user->id}}, $event.target.value)">
                                         Si
                                     </label>
@@ -84,7 +84,8 @@
                                     <label class="ml-2">
                                         <input {{count($user->roles) ? '' : 'checked'}} value="0" type="radio" name="{{$user->email}}" wire:change="assignRole({{$user->id}}, $event.target.value)">
                                         No
-                                    </label>
+                                    </label> -->
+                                    <a href="{{route('admin.users.edit', $user) }}">editar</a>
                                 </td>
                             </tr>
 

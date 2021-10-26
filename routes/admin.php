@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\RolController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Livewire\Admin\ShowCategory;
 use App\Http\Livewire\Admin\BrandComponent;
 use App\Http\Livewire\Admin\DepartamentComponent;
@@ -38,6 +39,8 @@ Route::get('departments/{department}', ShowDepartament::class)->name('admin.depa
 Route::get('provinces/{province}', ProvinceComponent::class)->name('admin.provinces.show');
 
 Route::get('users', UserComponent::class)->name('admin.users.index');
+Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+Route::put('users/{user}/update', [UserController::class, 'update'])->name('admin.users.update');
 
 Route::get('roles', [RolController::class, 'index'])->name('admin.roles.index');
 Route::get('roles/{rol}/edit', [RolController::class, 'edit'])->name('admin.roles.edit');

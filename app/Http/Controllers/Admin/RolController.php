@@ -10,13 +10,13 @@ use Spatie\Permission\Models\Role;
 class RolController extends Controller
 {
     public function index(){
-        return view('admin.rol.index');
+        return view('admin.roles.index');
     }
 
     public function edit(Role $rol)
     {
         $privileges = Permission::all();
-        return view('admin.rol.edit', compact('rol','privileges'));
+        return view('admin.roles.edit', compact('rol','privileges'));
     }
 
     public function update(Request $request, Role $rol)

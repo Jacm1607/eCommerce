@@ -1,7 +1,3 @@
-<!-- @section('script')
-    {{-- sweetalert2 --}}
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@endsection -->
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight capitalize">
@@ -14,11 +10,11 @@
         <x-jet-form-section submit="save" class="mb-6">
 
             <x-slot name="title">
-                Agregar una nueva ciudad
+                Agregar una nueva provincia
             </x-slot>
 
             <x-slot name="description">
-                Complete la información necesaria para poder agregar un nueva ciudad
+                Complete la información necesaria para poder agregar un nueva provincia
             </x-slot>
 
             <x-slot name="form">
@@ -58,11 +54,11 @@
         {{-- Mostrar Departamentos --}}
         <x-jet-action-section>
             <x-slot name="title">
-                Lista de ciudades
+                Lista de provincia
             </x-slot>
 
             <x-slot name="description">
-                Aquí encontrará todas las ciudades agregadas
+                Aquí encontrará todas las provincias agregadas
             </x-slot>
 
             <x-slot name="content">

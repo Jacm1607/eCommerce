@@ -14,7 +14,7 @@
             </div>
             <div class="col-span-6 sm:col-span-4">
                 <x-jet-label>Privilegios</x-jet-label>
-                <div class="grid grid-cols-4">
+                <div class="grid grid-cols-3">
                     @foreach ($privileges as $privilege)
                         <x-jet-label>
                             <x-jet-checkbox
