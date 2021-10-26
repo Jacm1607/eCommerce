@@ -7,11 +7,14 @@ use App\Http\Livewire\Admin\EditProducts;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\RolController;
 use App\Http\Livewire\Admin\ShowCategory;
 use App\Http\Livewire\Admin\BrandComponent;
 use App\Http\Livewire\Admin\DepartamentComponent;
+use App\Http\Livewire\Admin\PrivilegeComponent;
 use App\Http\Livewire\Admin\ProvinceComponent;
 use App\Http\Livewire\Admin\ShowDepartament;
+use App\Http\Livewire\Admin\ShowRol;
 use App\Http\Livewire\Admin\UserComponent;
 
 Route::get('/', ShowProducts::class)->name('admin.index');
@@ -35,3 +38,9 @@ Route::get('departments/{department}', ShowDepartament::class)->name('admin.depa
 Route::get('provinces/{province}', ProvinceComponent::class)->name('admin.provinces.show');
 
 Route::get('users', UserComponent::class)->name('admin.users.index');
+
+Route::get('roles', [RolController::class, 'index'])->name('admin.roles.index');
+Route::get('roles/{rol}/edit', [RolController::class, 'edit'])->name('admin.roles.edit');
+Route::put('roles/{rol}/update', [RolController::class, 'update'])->name('admin.roles.update');
+
+Route::get('privileges', PrivilegeComponent::class)->name('admin.privileges.index');
