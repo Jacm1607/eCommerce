@@ -32,14 +32,19 @@ class EditProducts extends Component
     protected $listeners = ['refreshProduct', 'delete'];
 
     public function mount(Product $product){
-        $this->product = $product;
-        $this->categories = Category::all();
-        $this->category_id = $product->subcategory->category->id;
-        $this->subcategories = Subcategory::where('category_id', $this->category_id)->get();
-        $this->slug = $this->product->slug;
-        $this->brands = Brand::whereHas('categories', function(Builder $query){
-            $query->where('category_id', $this->category_id);
-        })->get();
+        if (auth()->user()->can('product.edit')) {
+            $this->product = $product;
+            $this->categories = Category::all();
+            $this->category_id = $product->subcategory->category->id;
+            $this->subcategories = Subcategory::where('category_id', $this->category_id)->get();
+            $this->slug = $this->product->slug;
+            $this->brands = Brand::whereHas('categories', function(Builder $query){
+                $query->where('category_id', $this->category_id);
+            })->get();
+        } else {
+            abort(403);
+        }
+
     }
 
     public function refreshProduct(){
@@ -66,19 +71,26 @@ class EditProducts extends Component
     }
 
     public function save(){
-        $rules = $this->rules;
-        $rules['slug'] = 'required|unique:products,slug,' . $this->product->id;
-
-        $this->validate($rules);
-        $this->product->slug = $this->slug;
-        $this->product->save();
-        $this->emit('saved');
+        if (auth()->user()->can('product.update')) {
+            $rules = $this->rules;
+            $rules['slug'] = 'required|unique:products,slug,' . $this->product->id;
+            $this->validate($rules);
+            $this->product->slug = $this->slug;
+            $this->product->save();
+            $this->emit('saved');
+        } else {
+            abort(403);
+        }
     }
 
     public function deleteImage(Image $image){
-        Storage::delete([$image->url]);
-        $image->delete();
-        $this->product = $this->product->fresh();
+        if (auth()->user()->can('product.image-delete')) {
+            Storage::delete([$image->url]);
+            $image->delete();
+            $this->product = $this->product->fresh();
+        } else {
+            abort(403);
+        }
     }
 
     // public function delete(){

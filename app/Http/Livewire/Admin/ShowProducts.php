@@ -18,7 +18,13 @@ class ShowProducts extends Component
 
     public function render()
     {
-        $products = Product::where('name', 'like', '%' . $this->search . '%')->paginate(10);
-        return view('livewire.admin.show-products', compact('products'))->layout('layouts.admin');
+        if (auth()->user()->can('product.index')) {
+            $products = Product::where('name', 'like', '%' . $this->search . '%')->paginate(10);
+            return view('livewire.admin.show-products', compact('products'))->layout('layouts.admin');
+
+        } else {
+            abort(403);
+        }
+
     }
 }

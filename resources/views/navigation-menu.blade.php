@@ -12,30 +12,46 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
-                        Productos
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('admin.orders.index') }}" :active="request()->routeIs('admin.orders.index')">
-                        Ordenes
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('admin.categories.index') }}" :active="request()->routeIs('admin.categories.index')">
-                        Categorias
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('admin.brands.index') }}" :active="request()->routeIs('admin.brands.index')">
-                        Marcas
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('admin.departaments.index') }}" :active="request()->routeIs('admin.departaments.index')">
-                        Departamentos
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('admin.users.index') }}" :active="request()->routeIs('admin.users.index')">
-                        Usuarios
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('admin.roles.index')">
-                        Roles
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('admin.privileges.index') }}" :active="request()->routeIs('admin.privileges.index')">
-                        Privilegios
-                    </x-jet-nav-link>
+                        @can('product.index')
+                            <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
+                                Productos
+                            </x-jet-nav-link>
+                        @endcan
+                        @can('order.index')
+                            <x-jet-nav-link href="{{ route('admin.orders.index') }}" :active="request()->routeIs('admin.orders.index')">
+                                Ordenes
+                            </x-jet-nav-link>
+                        @endcan
+                        @can('category.index')
+                            <x-jet-nav-link href="{{ route('admin.categories.index') }}" :active="request()->routeIs('admin.categories.index')">
+                                Categorias
+                            </x-jet-nav-link>
+                        @endcan
+                        @can('brand.index')
+                            <x-jet-nav-link href="{{ route('admin.brands.index') }}" :active="request()->routeIs('admin.brands.index')">
+                                Marcas
+                            </x-jet-nav-link>
+                        @endcan
+                        @can('departament.index')
+                            <x-jet-nav-link href="{{ route('admin.departaments.index') }}" :active="request()->routeIs('admin.departaments.index')">
+                                Departamentos
+                            </x-jet-nav-link>
+                        @endcan
+                        @can('user.index')
+                            <x-jet-nav-link href="{{ route('admin.users.index') }}" :active="request()->routeIs('admin.users.index')">
+                                Usuarios
+                            </x-jet-nav-link>
+                        @endcan
+                        @can('rol.index')
+                            <x-jet-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('admin.roles.index')">
+                                Roles
+                            </x-jet-nav-link>
+                        @endcan
+                        @can('privilege.index')
+                            <x-jet-nav-link href="{{ route('admin.privileges.index') }}" :active="request()->routeIs('admin.privileges.index')">
+                                Privilegios
+                            </x-jet-nav-link>
+                        @endcan
                 </div>
             </div>
 

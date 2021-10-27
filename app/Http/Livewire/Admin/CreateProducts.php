@@ -46,23 +46,32 @@ class CreateProducts extends Component
     }
 
     public function mount(){
-        $this->categories = Category::where('category_status', '1')->get();
+        if (auth()->user()->can('product.create')) {
+            $this->categories = Category::where('category_status', '1')->get();
+        } else {
+            abort('403');
+        }
     }
 
     public function save(){
-        $rules = $this->rules;
-        $this->validate($rules);
-        $product = new Product();
-        $product->name = $this->name;
-        $product->sku = $this->sku;
-        $product->slug = $this->slug;
-        $product->description = $this->description;
-        $product->price = $this->price;
-        $product->subcategory_id = $this->subcategory_id;
-        $product->brand_id = $this->brand_id;
-        $product->quantity = $this->quantity;
-        $product->save();
-        return redirect()->route('admin.products.edit', $product);
+        if (auth()->user()->can('product.store')) {
+            $rules = $this->rules;
+            $this->validate($rules);
+            $product = new Product();
+            $product->name = $this->name;
+            $product->sku = $this->sku;
+            $product->slug = $this->slug;
+            $product->description = $this->description;
+            $product->price = $this->price;
+            $product->subcategory_id = $this->subcategory_id;
+            $product->brand_id = $this->brand_id;
+            $product->quantity = $this->quantity;
+            $product->save();
+            return redirect()->route('admin.products.edit', $product);
+        } else {
+            abort(403);
+        }
+
     }
 
     public function render()
