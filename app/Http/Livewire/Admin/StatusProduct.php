@@ -13,10 +13,13 @@ class StatusProduct extends Component
     }
 
     public function save(){
-        $this->product->status = $this->status;
-        $this->product->save();
-
-        $this->emit('saved');
+        if (auth()->user()->can('product.update-state')) {
+            $this->product->status = $this->status;
+            $this->product->save();
+            $this->emit('saved');
+        } else {
+            abort(403);
+        }
     }
     public function render()
     {

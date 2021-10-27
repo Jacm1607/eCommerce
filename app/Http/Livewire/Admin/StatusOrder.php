@@ -13,8 +13,12 @@ class StatusOrder extends Component
     }
 
     public function update(){
-        $this->order->status = $this->status;
-        $this->order->save();
+        if (auth()->user()->can('order.update-state')) {
+            $this->order->status = $this->status;
+            $this->order->save();
+        } else {
+            abort(403);
+        }
     }
 
     public function render()

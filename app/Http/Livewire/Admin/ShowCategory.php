@@ -44,9 +44,14 @@ class ShowCategory extends Component
     ];
 
     public function mount(Category $category){
-        $this->category = $category;
-        $this->getSubcategories();
-        $this->rand = rand();
+        if (auth()->user()->can('subcategory.index')) {
+            $this->category = $category;
+            $this->getSubcategories();
+            $this->rand = rand();
+        } else {
+            abort(403);
+        }
+
     }
 
     public function updatedCreateFormName($value){
@@ -62,17 +67,21 @@ class ShowCategory extends Component
     }
 
     public function save(){
-        $this->validate();
-        $image = $this->createForm['image']->store('public/subcategories');
-        $this->category->subcategories()->create(
-            [
-                'name' => $this->createForm['name'],
-                'slug' => $this->createForm['slug'],
-                'image' => $image
-            ]
-        );
-        $this->reset('createForm');
-        $this->getSubcategories();
+        if (auth()->user()->can('subcategory.store')) {
+            $this->validate();
+            $image = $this->createForm['image']->store('public/subcategories');
+            $this->category->subcategories()->create(
+                [
+                    'name' => $this->createForm['name'],
+                    'slug' => $this->createForm['slug'],
+                    'image' => $image
+                ]
+            );
+            $this->reset('createForm');
+            $this->getSubcategories();
+        } else {
+            abort(403);
+        }
     }
 
     public function edit($id){
@@ -89,29 +98,36 @@ class ShowCategory extends Component
     }
 
     public function update(){
-        $this->validate([
-            'editForm.name' => 'required',
-            'editForm.slug' => 'required|unique:subcategories,slug,' . $this->subcategory->id,
-        ]);
-        if ($this->editImage) {
-            $rules['editImage'] = 'required|image|max:1024';
-        }
-        $this->validate($rules);
-        if ($this->editImage) {
-            Storage::delete($this->editForm['image']);
-            $this->editForm['image'] = $this->editImage->store('public/categories');
-        }
-        $this->subcategory->update($this->editForm);
+        if (auth()->user()->can('subcategory.update')) {
+            $this->validate([
+                'editForm.name' => 'required',
+                'editForm.slug' => 'required|unique:subcategories,slug,' . $this->subcategory->id,
+            ]);
+            if ($this->editImage) {
+                $rules['editImage'] = 'required|image|max:1024';
+            }
+            $this->validate($rules);
+            if ($this->editImage) {
+                Storage::delete($this->editForm['image']);
+                $this->editForm['image'] = $this->editImage->store('public/categories');
+            }
+            $this->subcategory->update($this->editForm);
 
-        $this->getSubcategories();
-        $this->reset('editForm');
-
+            $this->getSubcategories();
+            $this->reset('editForm');
+        } else {
+            abort(403);
+        }
     }
 
     public function delete($id){
-        $subcategory = Subcategory::findOrFail($id);
-        $subcategory->update(['subcategory_status' => '0']);
-        $this->getSubcategories();
+        if (auth()->user()->can('subcategory.delete')) {
+            $subcategory = Subcategory::findOrFail($id);
+            $subcategory->update(['subcategory_status' => '0']);
+            $this->getSubcategories();
+        } else {
+            abort(403);
+        }
     }
 
     public function render()

@@ -59,9 +59,13 @@ class CreateCategory extends Component
 
     public function mount()
     {
-        $this->getBrands();
-        $this->getCategories();
-        $this->rand = rand();
+        if (auth()->user()->can('category.index')) {
+            $this->getBrands();
+            $this->getCategories();
+            $this->rand = rand();
+        } else {
+            abort(403);
+        }
     }
 
     public function updatedCreateFormName($value)
@@ -86,22 +90,26 @@ class CreateCategory extends Component
 
     public function save()
     {
-        $this->validate();
-        $image = $this->createForm['image']->store('public/categories');
-        $category = Category::create([
-            'name' => $this->createForm['name'],
-            'slug' => $this->createForm['slug'],
-            'icon' => $this->createForm['icon'],
-            'image' => $image
-        ]);
+        if (auth()->user()->can('category.store')) {
+            $this->validate();
+            $image = $this->createForm['image']->store('public/categories');
+                $category = Category::create([
+                'name' => $this->createForm['name'],
+                'slug' => $this->createForm['slug'],
+                'icon' => $this->createForm['icon'],
+                'image' => $image
+            ]);
 
-        $category->brands()->attach($this->createForm['brands']);
+            $category->brands()->attach($this->createForm['brands']);
 
-        $this->rand = rand();
-        $this->reset('createForm');
+            $this->rand = rand();
+            $this->reset('createForm');
 
-        $this->getCategories();
-        $this->emit('saved');
+            $this->getCategories();
+            $this->emit('saved');
+        } else {
+            abort(403);
+        }
     }
 
     public function edit(Category $category)
@@ -119,31 +127,39 @@ class CreateCategory extends Component
 
     public function update()
     {
-        $rules = [
-            'editForm.name' => 'required',
-            'editForm.slug' => 'required|unique:categories,slug,' . $this->category->id,
-            'editForm.icon' => 'required',
-            'editForm.brands' => 'required',
-        ];
-        if ($this->editImage) {
-            $rules['editImage'] = 'required|image|max:1024';
+        if (auth()->user()->can('category.update')) {
+            $rules = [
+                'editForm.name' => 'required',
+                'editForm.slug' => 'required|unique:categories,slug,' . $this->category->id,
+                'editForm.icon' => 'required',
+                'editForm.brands' => 'required',
+            ];
+            if ($this->editImage) {
+                $rules['editImage'] = 'required|image|max:1024';
+            }
+            $this->validate($rules);
+            if ($this->editImage) {
+                Storage::delete($this->editForm['image']);
+                $this->editForm['image'] = $this->editImage->store('public/categories');
+            }
+            $this->category->update($this->editForm);
+            $this->category->brands()->sync($this->editForm['brands']);
+            $this->reset(['editForm', 'editImage']);
+            $this->getCategories();
+        } else {
+            abort(403);
         }
-        $this->validate($rules);
-        if ($this->editImage) {
-            Storage::delete($this->editForm['image']);
-            $this->editForm['image'] = $this->editImage->store('public/categories');
-        }
-        $this->category->update($this->editForm);
-        $this->category->brands()->sync($this->editForm['brands']);
-        $this->reset(['editForm', 'editImage']);
-        $this->getCategories();
     }
 
     public function delete(Category $category)
     {
-        $category->update(['category_status' => '0']);
-        // $category->delete();
-        $this->getCategories();
+        if (auth()->user()->can('category.delete')) {
+            $category->update(['category_status' => '0']);
+            // $category->delete();
+            $this->getCategories();
+        } else {
+            abort(403);
+        }
     }
     public function render()
     {

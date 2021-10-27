@@ -11,7 +11,6 @@ class BrandComponent extends Component
 {
     use WithPagination;
 
-    // public $brands;
     public $brand;
     protected $listeners = ['delete'];
 
@@ -34,10 +33,14 @@ class BrandComponent extends Component
     ];
 
     public function save(){
-        $this->validate();
-        Brand::create($this->createForm);
-        $this->reset('createForm');
-        $this->render();
+        if (auth()->user()->can('brand.store')) {
+            $this->validate();
+            Brand::create($this->createForm);
+            $this->reset('createForm');
+            $this->render();
+        } else {
+            abort(403);
+        }
     }
 
     public function edit(Brand $brand){
@@ -47,21 +50,30 @@ class BrandComponent extends Component
     }
 
     public function update(){
-        $this->validate([
-            'editForm.name' => 'required'
-        ]);
-        $this->brand->update($this->editForm);
-        $this->reset('editForm');
-        $this->render();
+        if (auth()->user()->can('brand.update')) {
+            $this->validate([
+                'editForm.name' => 'required'
+            ]);
+            $this->brand->update($this->editForm);
+            $this->reset('editForm');
+            $this->render();
+        } else {
+            abort(403);
+        }
     }
 
     public function delete(Brand $brand){
-        $brand->delete();
+        $brand->update(['brand_status' => '0']);
         $this->render();
     }
 
     public function render()
     {
-        return view('livewire.admin.brand-component', ['brands' => Brand::paginate(10)])->layout('layouts.admin');
+        if (auth()->user()->can('brand.index')) {
+            return view('livewire.admin.brand-component', ['brands' => Brand::where('brand_status', '1')->paginate(10)])->layout('layouts.admin');
+        } else {
+            abort(403);
+        }
+
     }
 }
