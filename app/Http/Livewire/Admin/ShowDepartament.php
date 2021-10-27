@@ -30,8 +30,12 @@ class ShowDepartament extends Component
 
 
     public function mount(Departament $department){
-        $this->department = $department;
-        $this->getProvicies();
+        if (auth()->user()->can('province.index')) {
+            $this->department = $department;
+            $this->getProvicies();
+        } else {
+            abort(403);
+        }
     }
 
     public function getProvicies(){
@@ -39,20 +43,24 @@ class ShowDepartament extends Component
     }
 
     public function save(){
+        if (auth()->user()->can('province.store')) {
+            $this->validate([
+                "createForm.name" => 'required',
+                "createForm.cost" => 'required|numeric|min:1|max:100',
+            ]);
 
-        $this->validate([
-            "createForm.name" => 'required',
-            "createForm.cost" => 'required|numeric|min:1|max:100',
-        ]);
-
-        $this->department->provincies()->create($this->createForm);
+            $this->department->provincies()->create($this->createForm);
 
 
-        $this->reset('createForm');
+            $this->reset('createForm');
 
-        $this->getProvicies();
+            $this->getProvicies();
 
-        $this->emit('saved');
+            $this->emit('saved');
+        } else {
+            abort(403);
+        }
+
     }
 
     public function edit(Province $province){
@@ -63,12 +71,17 @@ class ShowDepartament extends Component
     }
 
     public function update(){
-        $this->province->name = $this->editForm['name'];
-        $this->province->cost = $this->editForm['cost'];
-        $this->province->save();
+        if (auth()->user()->can('province.update')) {
+            $this->province->name = $this->editForm['name'];
+            $this->province->cost = $this->editForm['cost'];
+            $this->province->save();
 
-        $this->reset('editForm');
-        $this->getProvicies();
+            $this->reset('editForm');
+            $this->getProvicies();
+        } else {
+            abort(403);
+        }
+
     }
 
 

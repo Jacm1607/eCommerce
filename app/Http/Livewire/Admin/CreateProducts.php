@@ -32,7 +32,7 @@ class CreateProducts extends Component
     public function updatedCategoryId($value){
         $this->subcategories = Subcategory::where('category_id', $value)->where('subcategory_status', '1')->get();
         $this->brands = Brand::whereHas('categories', function(Builder $query) use ($value){
-            $query->where('category_id', $value);
+            $query->where('category_id', $value)->where('brand_status', '1');
         })->get();
         $this->reset(['subcategory_id', 'brand_id']);
     }

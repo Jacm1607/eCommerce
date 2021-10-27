@@ -25,7 +25,11 @@ class DepartamentComponent extends Component
     ];
 
     public function mount(){
-        $this->getDepartments();
+        if (auth()->user()->can('departament.index')) {
+            $this->getDepartments();
+        } else {
+            abort(403);
+        }
     }
 
     public function getDepartments(){
@@ -33,18 +37,21 @@ class DepartamentComponent extends Component
     }
 
     public function save(){
+        if (auth()->user()->can('departament.store')) {
+            $this->validate([
+                "createForm.name" => 'required'
+            ]);
 
-        $this->validate([
-            "createForm.name" => 'required'
-        ]);
+            Departament::create($this->createForm);
 
-        Departament::create($this->createForm);
+            $this->reset('createForm');
 
-        $this->reset('createForm');
+            $this->getDepartments();
 
-        $this->getDepartments();
-
-        $this->emit('saved');
+            $this->emit('saved');
+        } else {
+            abort(403);
+        }
     }
 
     public function edit(Departament $department){
@@ -54,14 +61,15 @@ class DepartamentComponent extends Component
     }
 
     public function update(){
-        $this->department->name = $this->editForm['name'];
-        $this->department->save();
-
-        $this->reset('editForm');
-        $this->getDepartments();
+        if (auth()->user()->can('departament.update')) {
+            $this->department->name = $this->editForm['name'];
+            $this->department->save();
+            $this->reset('editForm');
+            $this->getDepartments();
+        } else {
+            abort(403);
+        }
     }
-
-
     // public function delete(Departament $department){
     //     $department->delete();
     //     $this->getDepartments();

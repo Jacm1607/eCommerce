@@ -26,8 +26,12 @@ class ProvinceComponent extends Component
     ];
 
     public function mount(Province $province){
-        $this->province = $province;
-        $this->getMunicipality();
+       if (auth()->user()->can('municipality.index')) {
+            $this->province = $province;
+            $this->getMunicipality();
+       } else {
+           abort(403);
+       }
     }
 
     public function getMunicipality(){
@@ -35,18 +39,21 @@ class ProvinceComponent extends Component
     }
 
     public function save(){
+        if (auth()->user()->can('municipality.store')) {
+            $this->validate([
+                "createForm.name" => 'required',
+            ]);
+            $this->province->municipalities()->create($this->createForm);
 
-        $this->validate([
-            "createForm.name" => 'required',
-        ]);
+            $this->reset('createForm');
 
-        $this->province->municipalities()->create($this->createForm);
+            $this->getMunicipality();
 
-        $this->reset('createForm');
+            $this->emit('saved');
+        } else {
+            abort(403);
+        }
 
-        $this->getMunicipality();
-
-        $this->emit('saved');
     }
 
     public function edit(Municipality $municipality){
@@ -56,11 +63,14 @@ class ProvinceComponent extends Component
     }
 
     public function update(){
-        $this->municipality->name = $this->editForm['name'];
-        $this->municipality->save();
-
-        $this->reset('editForm');
-        $this->getMunicipality();
+        if (auth()->user()->can('municipality.update')) {
+            $this->municipality->name = $this->editForm['name'];
+            $this->municipality->save();
+            $this->reset('editForm');
+            $this->getMunicipality();
+        } else {
+            abort(403);
+        }
     }
 
     // public function delete(Municipality $municipality){

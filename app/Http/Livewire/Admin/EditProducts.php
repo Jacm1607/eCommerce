@@ -44,7 +44,6 @@ class EditProducts extends Component
         } else {
             abort(403);
         }
-
     }
 
     public function refreshProduct(){

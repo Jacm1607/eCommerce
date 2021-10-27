@@ -80,7 +80,7 @@ class CreateCategory extends Component
 
     public function getBrands()
     {
-        $this->brands = Brand::all();
+        $this->brands = Brand::where('brand_status', '1')->get();
     }
 
     public function getCategories()

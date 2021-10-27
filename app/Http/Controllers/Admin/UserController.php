@@ -9,19 +9,23 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    // public function index(){
-    //     return view('admin.users.index');
-    // }
-
     public function edit(User $user)
     {
-        $roles = Role::all();
-        return view('admin.users.edit', compact('user','roles'));
+        if (auth()->user()->can('user.edit')) {
+            $roles = Role::all();
+            return view('admin.users.edit', compact('user','roles'));
+        } else {
+            abort(403);
+        }
     }
 
     public function update(Request $request, User $user)
     {
-        $user->syncRoles($request->roles);
-        return redirect()->route('admin.users.index');
+        if (auth()->user()->can('user.update')) {
+            $user->syncRoles($request->roles);
+            return redirect()->route('admin.users.index');
+        } else {
+            abort(403);
+        }
     }
 }

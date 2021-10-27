@@ -27,18 +27,28 @@ class PrivilegeComponent extends Component
     ];
 
     public function mount(){
-        $this->getPrivileges();
+       if (auth()->user()->can('privilege.index')) {
+            $this->getPrivileges();
+       } else {
+           abort(403);
+       }
+
     }
 
     public function getPrivileges(){
-        $this->privileges = Permission::all();
+        $this->privileges = Permission::orderBy('name', 'asc')->get();
     }
 
     public function save(){
-        $this->validate();
-        Permission::create(['name' => $this->createForm['name']]);
-        $this->reset('createForm');
-        $this->getPrivileges();
+        if (auth()->user()->can('privilege.store')) {
+            $this->validate();
+            Permission::create(['name' => $this->createForm['name']]);
+            $this->reset('createForm');
+            $this->getPrivileges();
+        } else {
+            abort(403);
+        }
+
     }
 
     public function edit($id){
@@ -51,12 +61,16 @@ class PrivilegeComponent extends Component
     }
 
     public function update(){
-        $this->validate([
-            'editForm.name' => 'required',
-        ]);
-        $this->privilege->update($this->editForm);
-        $this->getPrivileges();
-        $this->reset('editForm');
+        if (auth()->user()->can('privilege.update')) {
+            $this->validate([
+                'editForm.name' => 'required',
+            ]);
+            $this->privilege->update($this->editForm);
+            $this->getPrivileges();
+            $this->reset('editForm');
+        } else {
+            abort(403);
+        }
 
     }
     public function render()

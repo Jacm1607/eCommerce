@@ -43,14 +43,19 @@ class CreateRol extends Component
 
     public function save()
     {
-        $this->validate();
-        $role = Role::create(['name' => $this->createForm['name']]);
+        if (auth()->user()->can('rol.store')) {
+            $this->validate();
+            $role = Role::create(['name' => $this->createForm['name']]);
 
-        $role->permissions()->sync($this->createForm['privileges']);
-        $this->reset('createForm');
+            $role->permissions()->sync($this->createForm['privileges']);
+            $this->reset('createForm');
 
-        $this->getRoles();
-        $this->emit('saved');
+            $this->getRoles();
+            $this->emit('saved');
+        } else {
+            abort(403);
+        }
+
     }
 
     public function render()
