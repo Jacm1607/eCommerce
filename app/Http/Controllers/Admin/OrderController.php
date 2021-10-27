@@ -16,11 +16,11 @@ class OrderController extends Controller
                 $orders = Order::paginate(10)->appends(request()->query());
             }
 
-            $pendiente = Order::where('status', 1)->count();
-            $recibido = Order::where('status', 2)->count();
-            $enviado = Order::where('status', 3)->count();
-            $entregado = Order::where('status', 4)->count();
-            $anulado = Order::where('status', 0)->count();
+            $pendiente = Order::where('status', '1')->count();
+            $recibido = Order::where('status', '2')->count();
+            $enviado = Order::where('status', '3')->count();
+            $entregado = Order::where('status', '4')->count();
+            $anulado = Order::where('status', '0')->count();
 
             return view('admin.orders.index', compact('orders', 'pendiente', 'recibido', 'enviado', 'entregado', 'anulado'));
         } else {

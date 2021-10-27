@@ -21,7 +21,7 @@ class RolController extends Controller
     public function edit(Role $rol)
     {
         if (auth()->user()->can('rol.edit')) {
-            $privileges = Permission::all();
+            $privileges = Permission::orderBy('name', 'asc')->get();
             return view('admin.roles.edit', compact('rol','privileges'));
         } else {
             abort(403);
