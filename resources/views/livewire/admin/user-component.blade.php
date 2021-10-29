@@ -67,10 +67,10 @@
                                     <div class="text-sm text-gray-900">
                                         @if (count($user->roles))
                                             @foreach ($user->roles as $role)
-                                                {{ $role->name }} /
+                                                <span class="bg-blue-900 py-0.5 px-1.5 text-white rounded-md">{{ $role->name }}</span>
                                             @endforeach
                                         @else
-                                            No tiene rol
+                                            <span class="bg-lime-500 py-0.5 px-1.5 text-white rounded-md">Cliente</span>
                                         @endif
 
                                     </div>

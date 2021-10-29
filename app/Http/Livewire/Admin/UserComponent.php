@@ -30,9 +30,8 @@ class UserComponent extends Component
     public function render()
     {
         if (auth()->user()->can('user.index')) {
-            $users = User::
-            // $users = User::where('email', '<>', auth()->user()->email)
-                        where(function($query){
+            $users = User::where('email', '<>', auth()->user()->email)
+                        ->where(function($query){
                             $query->where('name', 'LIKE', '%' . $this->search . '%');
                             $query->orWhere('email', 'LIKE', '%' . $this->search . '%');
                         })->paginate();
